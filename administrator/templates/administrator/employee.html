@@ -1,0 +1,235 @@
+{% extends page %} {% block content %}
+<div class="container mt-3">
+    <div class="card card-body shadow-sm p-4">
+        <form class="d-flex">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+    <div class="row">
+        <div class="col ">
+            <div class="card card-body h-75" style="overflow-y: hidden; min-width:100%; display: inline-block;vertical-align:top;">
+                <div class=" card" style="overflow-y: auto;min-width:100%; max-height:100%; ">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Name</th>
+                                <th scope="col">Email id</th>
+                                <th scope="col">Role</th>
+                                <th scope="col">Total orders</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for user in users%}
+                            <tr onclick="window.location='{% url 'admins:Employee-Details' user.Id %}'">
+                                <td scope="row">{{user.Id}}</td>
+                                <td>{{user.Name}}</td>
+                                <td>{{user.Email_id}}</td>
+                                <td>{{user.role}}</td>
+                                <td>
+                                </td>
+                            </tr>
+                            </a>
+                            {% endfor %}
+                            <!-- <tr>
+                                <th scope="row">1</th>
+                                <td>Mark</td>
+                                <td>MArk@gmail.com</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">2</th>
+                                <td>Jacob</td>
+                                <td>Jacob@gmail.com</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">3</th>
+                                <td>Larry the Bird</td>
+                                <td>Larry@gmail.com</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">4</th>
+                                <td>Mark</td>
+                                <td>MArk@gmail.com</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">5</th>
+                                <td>Jacob</td>
+                                <td>Jacob@gmail.com</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">6</th>
+                                <td>Larry the Bird</td>
+                                <td>Larry@gmail.com</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">7</th>
+                                <td>Mark</td>
+                                <td>MArk@gmail.com</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">8</th>
+                                <td>Jacob</td>
+                                <td>Jacob@gmail.com</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">9</th>
+                                <td>Larry the Bird</td>
+                                <td>Larry@gmail.com</td>
+                                <td>15</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">10</th>
+                                <td>Mark</td>
+                                <td>MArk@gmail.com</td>
+                                <td>10</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">11</th>
+                                <td>Jacob</td>
+                                <td>Jacob@gmail.com</td>
+                                <td>5</td>
+                            </tr>
+                            <tr>
+                                <th scope="row">12</th>
+                                <td>Larry the Bird</td>
+                                <td>Larry@gmail.com</td>
+                                <td>15</td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+            <div class="card cad-body p-4">
+                <h5 class="card-title  text-center">Eployee Details</h5>
+                <div class="text-muted p-2"><b>Name:</b> {{first_user.Name}}
+                    <br>
+                    <b>Email id:</b> {{first_user.Email_id}}
+                    <br>
+                    <b>Total Orders:</b> 100
+                </div>
+                <div class="d-flex flex-col ">
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start py-1 me-2">
+                        <button class="btn btn-outline-primary " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal">Change Role</button>
+                    </div>
+                    <div class="d-grid gap-2 d-md-flex justify-content-md-start py-1">
+                        <button class="btn btn-outline-danger " type="button" data-bs-toggle="modal" data-bs-target="#exampleModal1">Remove</button>
+                    </div>
+                </div>
+
+                <h5 class="p-2">Last 5 orders</h5>
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="table-info text-dark">
+                            <th scope="col" class="text-dark">ID</th>
+                            <th scope="col" class="text-dark">Order Date</th>
+                            <th scope="col" class="text-dark">Order cost</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td scope="row ">1</td>
+                            <td>12,April 2022 3PM</td>
+                            <td>30</td>
+                        </tr>
+                        <tr>
+                            <td scope="row ">2</td>
+                            <td>6,April 2022 1PM</td>
+                            <td>20</td>
+                        </tr>
+                        <tr>
+                            <td scope="row ">3</td>
+                            <td>28,March 2022 2PM</td>
+                            <td>15</td>
+                        </tr>
+                        <tr>
+                            <td scope="row ">4</td>
+                            <td>20,March 2022 4PM</td>
+                            <td>12</td>
+                        </tr>
+                        <tr>
+                            <td scope="row ">5</td>
+                            <td>15,March 2022 5PM</td>
+                            <td>5</td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="{% url 'admins:Employees-Details'%}" method="POST">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Change Role</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="text-muted p-2 gap-2 d-grid">
+                        <b>Employee ID:</b> {{first_user.Id}}
+                        <br>
+                        <b>Name:</b> {{first_user.Name}}
+                        <br>
+                        <b>Email id:</b> {{first_user.Email_id}}
+                        <br>
+                        <div class="row">
+                            <div class="col-2">
+                                <b>Role:</b></div>
+                            <div class="col-8 p-0">
+                                <select class="form-select" aria-label="Default select example" name="role">
+                                <option value="employee {{first_user.Id}}" selected>Employee</option>
+                                <option value="manager {{first_user.Id}}">Manager</option>
+                              </select>
+                            </div>
+                        </div>
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+
+                    <input type="submit" class="btn btn-primary" value="Save Changes">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure, you want to remove the employee?
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <form action="{% url 'admins:Employees-Details' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="text" name="id" id="id" value="{{first_user.Id}}" hidden>
+                    <input type="submit" class="btn btn-primary" value="Yes">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

@@ -1,0 +1,90 @@
+{% extends 'customer/main.html' %} {% block content %}
+
+<div class="container">
+    <div class="card card-body mt-2">
+        <div class="card-title display-6 fs-4 text-center p-3 "><b>Profile</b></div>
+        <div class="px-3">
+            <form method="post" class="form">
+                {%csrf_token%}
+                <div class="row">
+                    <form action="{% url 'CUSTOMER:ProfilePage' %}" method="post"></form>
+                    <div class="d-grid gap-3 col-8">
+                        <div class="row text-muted px-2 display-6 fs-4">
+                            <label class="col-4" for="order Date"><b >Name</b></label> {% if edit %}
+                            <div class="col-8"><input type="text" name="name" id="name" class="form-control w-75" value="{{Name}}"> </div> {% else %}
+                            <div class="col-8">{{Name}}</div>
+                            {% endif %}
+                        </div>
+
+                        <div class="row text-muted px-2 display-6 fs-4">
+                            <label for="email_id" class="col-4"><b>Email Id</b></label> {% if edit %}
+                            <div class="col-8"><input type="email" name="email" id="email" class="form-control email w-75" value="{{Email_id}}"> </div>{% else %}
+                            <div class="col-8">{{Email_id}}</div>
+                            {% endif %}
+                        </div>
+                        <div class="row text-muted px-2 display-6 fs-4">
+                            <label for="number" class="col-4"><b>Contact Number</b></label> {% if edit %}
+                            <div class="col-8"><input type="number" name="contact" id="contact" class="form-control w-75" value="{{Contact}}"> </div> {% else %}
+                            <div class="col-8">{{Contact}}</div>
+                            {% endif %}
+                        </div>
+                        <div class="row text-muted px-2 display-6 fs-4">
+                            <label for="password" class="col-4"><b >Password</b></label> {% if edit %}
+                            <div class="col-8">
+                                <div class="input-group mb-3 " style="width: 72%;">
+                                    <input class="form-control " id="password" name="password" placeholder="Password" value="{{Password_hidden}}">
+                                    <i class="fa fa-eye" id="togglePassword" style="cursor: pointer; margin-left: -40px; margin-top:5px; z-index: 100;"></i>
+                                </div>
+                            </div>{% else %}
+                            <div class="col-8">{{Password_hidden}}</div>
+                            {% endif %}
+                        </div>
+                        <div class="row text-muted px-2 display-6 fs-4">{% if edit %}
+                            <div class="col text-end"><input type="submit" name="save" value="SAVE PROFILE" class="btn btn-outline-success"></div>
+                            {% else %}
+
+                            <div class="col text-end"><input type="submit" name="edit" value="EDIT PROFILE" class="btn btn-outline-primary"></div>
+                            {% endif %}
+                            <div class="col"><input type="button" value="DELETE ACCOUNT" class="btn btn-outline-danger" data-bs-toggle="modal" data-bs-target="#exampleModal1"></div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal1" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure, you want to delete your account permanently?
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <form action="{% url 'CUSTOMER:ProfilePage' %}" method="POST">
+                    {% csrf_token %}
+                    <input type="submit" name="delete" class="btn btn-primary" value="Yes">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    const togglePassword = document.querySelector("#togglePassword");
+    const password = document.querySelector("#password");
+    console.log(togglePassword);
+    togglePassword.addEventListener("click", function() {
+
+        // toggle the type attribute
+        const type = password.getAttribute("type") === "password" ? "text" : "password";
+        password.setAttribute("type", type);
+        // toggle the eye icon
+        this.classList.toggle('fa-eye');
+        this.classList.toggle('fa-eye-slash');
+    });
+</script>{% endblock content %}

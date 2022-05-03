@@ -1,0 +1,118 @@
+{% extends 'customer\main.html' %} {% load static %}{% load customer_extras %}{% load crispy_forms_tags %}{% block content %}
+<div class="container">
+    <div class="row gap-4 mt-3">
+        <div class="col">
+            <div class="card card-body shadow-sm">
+                <h5 class="card-title text-center m-3">Order History</h5>
+                {% if hasOrders %}
+                <table class="table table-striped m-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Order ID</th>
+                            <th scope="col">Order Date</th>
+                            <th scope="col">Order Type</th>
+                            <th scope="col">Order Cost</th>
+                            <th scope="col">TimeSlot</th>
+                            <th scope="col">Pickup Date</th>
+                            <th scope="col">Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for order in orders %}
+                        <tr>
+                            <td scope="row">{{order.Id}}</td>
+                            <td>{{order.Order_date}}</td>
+                            <td>{{order.Order_type}}</td>
+                            <td>{{order.Order_cost}}</td>
+                            <td>{{order.Time_Slot}}</td>
+                            <td>{{order.Pickup_date}}</td>
+                            <td><button type="button" class="btn btn-outline-primary btn-sm pe-2 editButton" data-bs-toggle="modal" data-bs-target="#editModal" data-catid="{{order.Id}}">Edit</button></td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+                {% else %}
+                <div class="display-6 fs-4 text-muted text-center m-5">No Order History Yet</div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade rounded-6" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style=" border-radius: 2rem; width: 200%;
+        position: absolute;
+        left: 50%;
+        top: 50%; 
+        margin-left: -100%;
+        ">
+            <div class="modal-body p-3">
+                {% crispy order_form1 %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'CUSTOMER:Order History' %}" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    Are you sure, you want to cancel the order?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <input type="submit" class="btn btn-primary" value="Yes" name="cancel Order">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script>
+    $(document).ready(function() {
+        $('.editButton').click(function() {
+            $.ajax({
+                type: "GET",
+                url: "{% url 'CUSTOMER:Order History'%}",
+                data: {
+                    id: $(this).data("catid")
+                },
+                success: function(e) {
+                    alert("success");
+                }
+            })
+        })
+    });
+    $(document).on("submit", "#edit_form", function(e) {
+
+        $.ajax({
+            type: "POST",
+            url: "{% url 'CUSTOMER:Order History'%}",
+            data: {
+                id: $("#order_id").val(),
+                csrfmiddlewaretoken: $("input[name=csrfmiddlewaretoken]").val(),
+            },
+            success: function() {
+
+            }
+
+        })
+        e.preventDefault();
+    })
+</script>
+<script>
+    const value = "{{mydata}}";
+    var select = document.getElementById('e_timeSlot');
+    for (var i = 0, l = select.options.length, o; i < l; i++) {
+        o = select.options[i];
+        if (value == o.value) {
+            o.selected = true;
+        }
+    }
+</script>
+
+{% endblock content %}

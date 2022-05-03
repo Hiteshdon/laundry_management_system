@@ -1,0 +1,232 @@
+{% extends page %} {% load static %}{% block content %}
+<div class="container">
+    <div class="row gap-4 mt-3">
+        <div class="col-8 gap-4">
+            <!-- <div class="card card-body shadow-sm">
+                <h5 class="card-title text-center m-2">Available Machines</h5>
+                <div class="col text-center m-3 mb-5">
+                    <img src="{%static 'images\washer.png'%}" alt="Washer" width="30px" height="30px" class="mx-3">Washers
+                    <img src="{%static 'images\dryer.png'%}" width="30px" height="30px" alt="Dryer" class="mx-3">Dryers
+                </div>
+                <div class="row ">
+                    <div class="col mx-3"><img src="{%static 'images\washer.png'%}" alt="Washer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-01</span><a href="" class="text-success mx-2 fs-5">Available</a>
+                        <hr>
+                        <img src="{%static 'images\washer.png'%}" alt="Washer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-02</span><a href="" class="text-muted mx-2 fs-5">Assigned</a>
+                        <hr>
+                        <img src="{%static 'images\washer.png'%}" alt="Washer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-03</span><a href="" class="text-muted mx-2 fs-5">Assigned</a>
+                        <hr>
+                        <img src="{%static 'images\washer.png'%}" alt="Washer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-04</span><a href="" class="text-muted mx-2 fs-5">Assigned</a>
+                        <hr>
+                        <img src="{%static 'images\washer.png'%}" alt="Washer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-05</span><a href="" class="text-success mx-2 fs-5">Available</a>
+                        <hr>
+                        <img src="{%static 'images\washer.png'%}" alt="Washer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-06</span><a href="" class="text-success mx-2 fs-5">Available</a>
+                    </div>
+                    <div class="col mx-3"><img src="{%static 'images/dryer.png'%}" alt="Dryer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-07</span><a href="" class="text-muted mx-2 fs-5">Assigned</a>
+                        <hr>
+                        <img src="{%static 'images/dryer.png'%}" alt="Dryer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-08</span><a href="" class="text-muted mx-2 fs-5">Assigned</a>
+                        <hr>
+                        <img src="{%static 'images/dryer.png'%}" alt="Dryer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-09</span><a href="" class="text-success mx-2 fs-5">Available</a>
+                        <hr>
+                        <img src="{%static 'images/dryer.png'%}" alt="Dryer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-10</span><a href="" class="text-success mx-2 fs-5">Available</a>
+                        <hr>
+                        <img src="{%static 'images/dryer.png'%}" alt="Dryer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-11</span><a href="" class="text-success mx-2 fs-5">Available</a>
+                        <hr>
+                        <img src="{%static 'images/dryer.png'%}" alt="Dryer" width="30px" height="30px" class="mx-2"><span class="fs-4">M-12</span><a href="" class="text-muted mx-2 fs-5">Assigned</a>
+
+                    </div>
+                </div>
+            </div> -->
+            <div id="color3" class="card card-body shadow-sm m-3 ">
+                <h5 class="card-title text-center">Orders List</h5>
+                <div class="card chart-container ">
+                    <table class="table table-striped" id="scope">
+                        <thead>
+                            <tr>
+                                <th scope="col">ID</th>
+                                <th scope="col">Customer Name</th>
+                                <th scope="col">Order Type</th>
+                                <th scope="col">Order Date</th>
+                                <th scope="col">Order cost</th>
+                                <th scope="col">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td scope="row">1</td>
+                                <td>Michael Gordan</td>
+                                <td>Dry</td>
+                                <td>12 April,2022 1PM</td>
+                                <td>10</td>
+                                <td><button type="button" class="btn btn-outline-success btn-sm pe-2" data-bs-toggle="modal" data-bs-target="#Assign">Approve</button>
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Assign">Decline</button></td>
+                            </tr>
+                            <tr>
+                                <td scope="row">2</td>
+                                <td>Michael Gordan</td>
+                                <td>Wash</td>
+                                <td>13 April,2022 2PM</td>
+                                <td>20</td>
+                                <td><button type="button" class="btn btn-outline-success btn-sm pe-2" data-bs-toggle="modal" data-bs-target="#Assign">Approve</button>
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Assign">Decline</button></td>
+                            </tr>
+                            <tr>
+                                <td scope="row">3</td>
+                                <td>Michael Gordan</td>
+                                <td>Wash</td>
+                                <td>14 April,2022 3PM</td>
+                                <td>30</td>
+                                <td><button type="button" class="btn btn-outline-success btn-sm pe-2" data-bs-toggle="modal" data-bs-target="#Assign">Approve</button>
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Assign">Decline</button></td>
+                            </tr>
+                            <tr>
+                                <td scope="row">4</td>
+                                <td>Michael Gordan</td>
+                                <td>Dry</td>
+                                <td>15 April,2022 4PM</td>
+                                <td>40</td>
+                                <td><button type="button" class="btn btn-outline-success btn-sm pe-2" data-bs-toggle="modal" data-bs-target="#Assign">Approve</button>
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Assign">Decline</button></td>
+                            </tr>
+                            <tr>
+                                <td scope="row">5</td>
+                                <td>Michael Gordan</td>
+                                <td>Dry</td>
+                                <td>16 April,2022 5PM</td>
+                                <td>50</td>
+                                <td><button type="button" class="btn btn-outline-success btn-sm pe-2" data-bs-toggle="modal" data-bs-target="#Assign">Approve</button>
+                                    <button type="button" class="btn btn-outline-danger btn-sm" data-bs-toggle="modal" data-bs-target="#Assign">Decline</button></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col">
+
+            <div class="d-grid gap-3">
+                <div id="color3" class="card card-body shadow text-center">
+                    <h5 class="card-title ">Available Machines</h5><span class="display-4 text-muted">10</span>
+                </div>
+                <div id="color2" class="card card-body shadow text-center">
+                    <h5 class="card-title ">Working Machines</h5><span class="display-4 text-muted">12</span>
+                </div>
+                <div id="color1" class=" card card-body shadow-sm mb-4 gap-2 text-center">
+                    <h5 class="card-title m-3">Manage Machines</h5>
+                    <div class=" mx-3 mb-2">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#add_machines">Add Machine</button>
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#remove">Remove Machine</button>
+                        <br>
+                        <button type="button" class="btn btn-warning m-2" data-bs-toggle="modal" data-bs-target="#edit_Machines">Edit Machine Status</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="add_machines" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Add New Machine!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'admins:Employees-Details' %}" method="POST">
+                {% csrf_token %}
+                <div class="modal-body d-grid gap-2">
+                    <div class="form-group">
+                        <label for="exampleSelectRole2">Machine Name</label>
+                        <input type="text" name="machine_name" id="machine_name" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelectRole2">Machine Type</label>
+                        <select class="form-control " name="status" id="status">
+                        <option value="dryer">Dryer</option>
+                        <option value="washer">Washer</option>
+                    </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelectRole2">Machine Staus</label>
+                        <select class="form-control " name="status" id="status">
+                        <option value="working">Working</option>
+                        <option value="damages">Damanged</option>
+                    </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <input type="submit" class="btn btn-primary" value="Add Machine" name="Add Machine">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade rounded-6" id="edit_Machines" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Edit Machine Status</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'manager:Homepage' %}" method="POST" class=" d-grid gap-3">
+                <div class="modal-body p-3">
+                    {% csrf_token %}
+                    <div class="form-group py-2">
+                        <label for="exampleSelectRole1">Machine</label>
+                        <select class="form-control " name="machines" id="machines">
+                            {% for machine in machines %}
+                            <option value="{{machine.id}}">{{machine.Machine_name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelectRole2">Machine Staus</label>
+                        <select class="form-control " name="status" id="status">
+                            <option value="working">Working</option>
+                            <option value="damages">Damanged</option>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <input type="submit" class="btn btn-primary" value="Save Changes" name="Edit Machines">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'manager:Homepage' %}" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    Are you sure, you want to remove the Machine?<br>
+                    <div class="form-group mt-2">
+                        <div class="row align-middle">
+                            <label class="text-muted col-2 p0 m-0" for="machine"><b> Machine </b></label>
+                            <div class="col  pe-2 m-0">
+                                <select class="form-control" name="machines" id="machines">
+                                    {% for machine in machines %}
+                                    <option value="{{machine.id}}">{{machine.Machine_name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <input type="submit" class="btn btn-primary" value="Yes" name="Remove Machines">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock content %}

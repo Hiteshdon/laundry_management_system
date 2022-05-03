@@ -1,0 +1,234 @@
+{% load static %} {% load crispy_forms_tags %}
+<script>
+    $(document).ready(function() {
+        $("ul.navbar-nav > li").click(function(e) {
+            $("ul.navbar-nav > li").removeClass("active");
+            $(this).addClass("active");
+        });
+    });
+</script>
+
+{% if hasSignedIn %}
+<div class="container-md mt-2">
+    <nav class="navbar navbar-expand-md navbar-light bg-light shadow bg-body rounded myDiv">
+        <div class="container-fluid bg">
+            <a id="logo" class="nav-brand text-info fs-3 pe-2" href="{% url 'manager:Homepage' %}"><img src="{% static 'images\logo1.png' %}" alt="Logo" class="d-inline-block " width="50" height="50">Laundry</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button> {% if User.role == "manager" %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-3 mb-md-0 fs-5">
+                    <li class="nav-item active">
+                        <a class="nav-link " aria-current="page" href="{% url 'manager:Homepage' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="employee/">Employee</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-3 mb-md-0 fs-5">
+                    <li class="nav-item active">
+                        <a class="nav-link " aria-current="page" href="/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            {% elif User.role == "employee" %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-3 mb-md-0 fs-5">
+                    <li class="nav-item active">
+                        <a class="nav-link " aria-current="page" href="{% url 'employee:Homepage' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'employee:Inventory' %}">Inventory</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-3 mb-md-0 fs-5">
+                    <li class="nav-item active">
+                        <a class="nav-link " aria-current="page" href="/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            {% elif User.role == "customer" %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-3 mb-md-0 fs-5">
+                    <li class="nav-item active">
+                        <a class="nav-link " aria-current="page" href="{% url 'CUSTOMER:Homepage' %}">Order Laundry</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'CUSTOMER:Order History' %}">Order History</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-bs-toggle="modal" data-bs-target="#feedback">Send Feedback</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-3 mb-md-0 fs-5">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{% url 'CUSTOMER:ProfilePage' %}"><i class="fa fa-user"></i></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link " aria-current="page" href="/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            {% elif User.role == "administrator" %}
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav me-auto mb-3 mb-md-0 fs-5">
+                    <li class="nav-item active">
+                        <a class="nav-link " aria-current="page" href="{% url 'admins:Homepage' %}">Dashboard</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="manager/">Manager</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/admins/employee/">Employee</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-3 mb-md-0 fs-5">
+                    <li class="nav-item active">
+                        <a class="nav-link " aria-current="page" href="/">Logout</a>
+                    </li>
+                </ul>
+            </div>
+            {% endif %}
+        </div>
+    </nav>
+</div>
+{% else %}
+<div class="shadow rounded">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
+        <div class="container">
+            <span class="navbar-text">
+                We are open 7 days per week 8am-9pm
+              </span>
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login" data-bs-toggle="modal" data-bs-target="#exampleModal"><button type="button" class="btn btn-primary" >
+                        LOGIN
+                      </button></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom border-3 border-info p-0">
+        <div class="container fs-5">
+            <a id="logo" class="nav-brand text-info fs-3 pe-2 h-50" href="/"><img src="{% static 'images\logo1.png' %}" alt="Logo" class="d-inline-block " width="50" height="50">Laundry</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav nav-pills ms-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="#home">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#Pricing">PRICING</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="/home">ABOUT US</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#contact">CONTACTS</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/order/">order</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+</div>
+
+{% endif %}
+<div class="modal fade" id="feedback" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Feedback!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form action="{% url 'CUSTOMER:Order History' %}" method="POST">
+                {% csrf_token %}
+                <div class="modal-body">
+                    Write your Feedback<br>
+                    <div class="form-group mt-2">
+                        <Textarea rows="4" class="form-control" name="feedback" id="feedback"></Textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <input type="submit" class="btn btn-primary" value="Send" name="sendFeedback">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<div class="modal fade rounded-6" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content" style="display: flex; border-radius: 4rem;width: 140%;font-family: 'PT Sans', sans-serif;">
+            <div class="modal-body p-0">
+                <div class="row">
+                    <div class="col-6 mx-3" id="main">
+                        <div class="row">
+                            <div class="col">
+                                <h1 class="text-center mt-5">Sign Up </h1>
+                                {% comment %}
+                                <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3> {% endcomment %} {% crispy signup_form %}
+                            </div>
+                            <div class="col-2">
+                                <div>
+                                    <?xml version="1.0" encoding="UTF-8"?>
+                                    <svg width="67px" height="578px" viewBox="0 0 67 578" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                                    <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+                                        <title>Path</title>
+                                        <desc>Created with Sketch.</desc>
+                                        <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <path d="M11.3847656,-5.68434189e-14 C-7.44726562,36.7213542 5.14322917,126.757812 49.15625,270.109375 C70.9827986,341.199016 54.8877465,443.829224 0.87109375,578 L67,578 L67,-5.68434189e-14 L11.3847656,-5.68434189e-14 Z" id="Path" fill="#0dcaf0"></path>
+                                        </g>
+                                     </svg>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col" style="background-color: #0dcaf0;border-radius: 0 4rem 4rem 0;text-align: center;">
+                        <div class="row">
+                            <div class="col-8 m-4 p-0">
+                                <div class="sec-content text-start">
+                                    <h2 class="mt-5">Welcome Back!</h2>
+                                    {% comment %}
+                                    <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3> {% endcomment %} {% crispy login_form %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="forgot_password" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form method="post" action="/login/">
+                {% csrf_token %}
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Enter your registered email address</p>
+                    <input type="email" class="form-control" id="exampleInputEmail1" name='email1' aria-describedby="emailHelp" placeholder="E-mail">
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                    <input type="submit" class="btn btn-primary" value="Yes">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<script src="{% static 'js/auto-hiding-bootstrap-navbar.min.js' %}"></script>

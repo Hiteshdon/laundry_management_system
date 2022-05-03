@@ -1,0 +1,107 @@
+{% load static %}
+<div class="shadow rounded">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light p-0">
+        <div class="container">
+            <span class="navbar-text">
+                We are open 7 days per week 8am-9pm
+              </span>
+            <ul class="navbar-nav ms-auto">
+
+                <li class="nav-item">
+                    <a class="nav-link" href="/login" data-bs-toggle="modal" data-bs-target="#exampleModal"><button type="button" class="btn btn-primary" >
+                        LOGIN
+                      </button></a>
+                </li>
+            </ul>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom border-3 border-info p-0 ">
+        <div class="container fs-5 text">
+            <a id="logo" class="nav-brand text-info fs-3 pe-2" href="/"><img src="{% static 'images\logo1.png' %}" alt="Logo" class="d-inline-block " width="50" height="50">Laundry</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav nav-pills ms-auto ">
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="">HOME</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="">PRICING</a>
+                    </li>
+                    <!-- <li class="nav-item">
+                        <a class="nav-link" href="/home">ABOUT US</a>
+                    </li> -->
+                    <li class="nav-item">
+                        <a class="nav-link" href="">CONTACTS</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="/order/">order</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+</div>
+
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <div class="column" id="main">
+                    <h1>Sign Up </h1>
+                    {% comment %} <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3> {% endcomment %}
+                    <form action="/login/" method="POST">
+                        {% csrf_token %}
+                        <div class="form-group">
+                            <label for="exampleInputName">Name</label>
+                            <input type="name" class="form-control" id="exampleInputName" name="name" placeholder="Name">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">E-mail </label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="E-mail">
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputPassword1">Password</label>
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+                        </div>
+                        <button type="submit" class="btn btn-primary">Sign Up</button>
+                    </form>
+                </div>
+                <div>
+                    <?xml version="1.0" encoding="UTF-8"?>
+                    <svg width="67px" height="578px" viewBox="0 0 67 578" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                <!-- Generator: Sketch 53.2 (72643) - https://sketchapp.com -->
+                <title>Path</title>
+                <desc>Created with Sketch.</desc>
+                <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                    <path d="M11.3847656,-5.68434189e-14 C-7.44726562,36.7213542 5.14322917,126.757812 49.15625,270.109375 C70.9827986,341.199016 54.8877465,443.829224 0.87109375,578 L67,578 L67,-5.68434189e-14 L11.3847656,-5.68434189e-14 Z" id="Path" fill="#0dcaf0"></path>
+                </g>
+            </svg>
+                </div>
+                <div class="column" id="secondary">
+                    <div class="sec-content text-start">
+                        <h2>Welcome Back!</h2>
+                        {% comment %} <h3>Lorem ipsum dolor sit amet, consectetur adipiscing elit</h3> {% endcomment %}
+                        <form method="POST" action="/login/">
+                            {% csrf_token %}
+                            <div class="form-group">
+                                <label for="exampleInputEmail1">E-mail </label>
+                                <input type="email" class="form-control" id="exampleInputEmail1" name='email1' aria-describedby="emailHelp" placeholder="E-mail">
+                            </div>
+                            <div class="form-group">
+                                <label for="exampleInputPassword1">Password</label>
+                                <input type="password" class="form-control" id="exampleInputPassword1" name='password1' placeholder="Password">
+                            </div>
+                            <button type="submit" class="btn btn-primary" id="btn primary">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

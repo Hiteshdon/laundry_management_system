@@ -1,0 +1,141 @@
+{% extends page %} {% block content %}
+
+<div class="container mt-3">
+    <div class="row gap-4 p-2 text-center">
+        <div class="col">
+            <div id="color1" class=" card card-body shadow-sm ">
+                <h5 class="card-title ">Total Orders</h5>
+                <span class="muted-text display-6 text-secondary ">{{total_orders}}</span>
+            </div>
+        </div>
+        <div class="col ">
+            <div id="color2" class="card card-body shadow-sm ">
+                <h5 class="card-title ">Today Pending Orders</h5>
+                <span class="muted-text display-6 text-secondary ">{{pending_orders}}</span>
+            </div>
+        </div>
+        <div class="col ">
+            <div id="color3" class=" card card-body shadow-sm ">
+                <h5 class="card-title ">Today Total Orders</h5>
+                <span class="text-muted display-6 text-secondary text-center">{{today_orders}} 
+                </span>
+            </div>
+        </div>
+    </div>
+    <div class="row gap-4 p-2 text-center ">
+        <div class="col-8">
+            <div id="color3" class="card card-body shadow-sm gap-2 custom-container">
+                <h5 class="card-title m-2">Weekly Amount</h5>
+                <div class="card h-100 mx-5"><canvas id="speedChart" width="600" height="290"></canvas></div>
+            </div>
+        </div>
+        <div class="col ">
+            <div class=" row p-2 text-center ">
+                <div id="color1" class=" card card-body shadow-sm mb-2 ">
+                    <h5 class="card-title ">Today Amount</h5>
+                    <span class="muted-text display-6 text-secondary ">${{today_amount}}</span>
+                </div>
+                <div id="color2" class=" card card-body shadow-sm mb-2 ">
+                    <a href="{% url 'admins:Customers-Details' %}">
+                        <h5 class="card-title ">Total Customers</h5>
+                        <span class="muted-text display-6 text-secondary ">{{total_customers}}</span></a>
+                </div>
+                <div id="color3" class=" card card-body shadow-sm mb-2 ">
+                    <a href="{% url 'admins:Employees-Details' %}">
+                        <h5 class="card-title ">Total Employees</h5>
+                        <span class="muted-text display-6 text-secondary ">{{total_employees}}</span>
+                    </a>
+                    <div class="d-grid gap-3 mx-5 my-2 p-0">
+                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addEmployee">Add Employee</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade rounded-6" id="addEmployee" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body p-3">
+                <form action="{% url 'admins:Homepage' %}" method="POST" class=" d-grid gap-3">
+                    {% csrf_token %}
+                    <div class="form-group">
+                        <label for="exampleInputName">Name</label>
+                        <input type="name" class="form-control" id="exampleInputName" name="name" placeholder="Name">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">E-mail </label>
+                        <input type="email" class="form-control" id="exampleInputEmail1" name="email" aria-describedby="emailHelp" placeholder="E-mail">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputEmail1">Contact Number</label>
+                        <input type="number" class="form-control" id="exampleInputEmail1" name="contact1" aria-describedby="emailHelp" placeholder="Contact Number">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" class="form-control" id="exampleInputPassword1" name="password" placeholder="Password">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleSelectRole1">Role</label>
+                        <select class="form-select" aria-label="Default select example" id="exampleSelectRole1" name="role">
+                            <option value="employee" selected>Employee</option>
+                            <option value="manager">Manager</option>
+                            <option value="customer">Customer</option>
+                          </select>
+                    </div>
+                    <button type="submit" class="btn btn-primary mt-5">Add</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="remove" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Alert!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure, you want to remove the employee?
+            </div>
+            <div class="modal-footer">
+
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">No</button>
+                <form method="get">
+                    <input type="submit" class="btn btn-primary" value="Yes">
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.7.1/chart.js" integrity="sha512-Lii3WMtgA0C0qmmkdCpsG0Gjr6M0ajRyQRQSbTF6BsrVh/nhZdHpVZ76iMIPvQwz1eoXC3DmAg9K51qT5/dEVg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+{{weekly_data| json_script:"weekly_data"}} {{weeks| json_script:"weeks"}}
+<script>
+    const speedCanvas = document.getElementById("speedChart").getContext("2d");
+    const mydata = JSON.parse(document.getElementById("weekly_data").textContent);
+    var labels = JSON.parse(document.getElementById("weeks").textContent);
+
+    Chart.defaults.font.family = "Teko";
+    Chart.defaults.font.size = 22;
+    Chart.defaults.color = "black";
+
+    let speedData = {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: "Amount per Day",
+                fill: true,
+                borderColor: "#008DD4",
+                data: mydata,
+            }]
+        }
+    };
+
+    let lineChart = new Chart(speedCanvas, speedData);
+</script>
+
+
+{% endblock content %}

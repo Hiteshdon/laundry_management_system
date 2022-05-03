@@ -1,0 +1,89 @@
+{% extends page %} {% block content %}
+<div class="container">
+    <div class="row mt-4 ">
+        <div class="col">
+            <div class="card card-body shadow-sm" id="color3">
+                <h5 class="card-title mb-3 text-center">Inventory</h5>
+                <div class="card">
+                    <table class="table table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Supply Name</th>
+                                <th scope="col">Available Quantity</th>
+                                <th scope="col">Need</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for item in supply_items%}
+                            <tr>
+                                <td scope="row">{{item.id}}</td>
+                                <td>{{item.Supply_Name}}</td>
+                                <td>{{item.Quantity}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-outline-primary btn-sm" onclick='location.href="{% url   "employee:Add Supply" item.id%} "'>Update</button>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                            <!-- <tr>
+                                <td scope="row ">1</td>
+                                <td>fabric Detergent</td>
+                                <td>10</td>
+                                <td><button type="button " class="btn btn-outline-primary btn-sm ">Need Supply</button></td>
+                            </tr>
+                            <tr>
+                                <td scope="row ">2</td>
+                                <td>Detergent Powder</td>
+                                <td>20</td>
+                                <td><button type="button " class="btn btn-outline-primary btn-sm ">Need Supply</button></td>
+                            </tr>
+                            <tr>
+                                <td scope="row ">3</td>
+                                <td>fabric Conditioner</td>
+                                <td>15</td>
+                                <td><button type="button " class="btn btn-outline-primary btn-sm ">Need Supply</button></td>
+                            </tr>
+                            <tr>
+                                <td scope="row ">4</td>
+                                <td>Liquids</td>
+                                <td>5</td>
+                                <td><button type="button " class="btn btn-outline-primary btn-sm ">Need Supply</button></td>
+                            </tr>
+                            <tr>
+                                <td scope="row ">5</td>
+                                <td>dry Conditioners</td>
+                                <td>17</td>
+                                <td><button type="button " class="btn btn-outline-primary btn-sm ">Need Supply</button></td>
+                            </tr> -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col ">
+            <div class="card card-body shadow-sm " id="color1 ">
+                <h5 class="card-title mb-5 text-center ">Add Supply</h5>
+                <form class="d-grid px-3 gap-4 " method="POST " action="{% url 'employee:Inventory'%} ">
+                    {% csrf_token %}
+                    <div class="form-group row ">
+                        <label for="SupplyName " class="col-sm-3 col-form-label ">Supply Name</label>
+                        <div class="col-sm-9 ">
+                            <input type="text " readonly disabled class="form-control " id="SupplyName " value='{{supply_item.Supply_Name}}' placeholder="Suppply Name ">
+                        </div>
+                    </div>
+                    <div class="form-group row ">
+                        <label for="SupplyQuantity " class="col-sm-4 col-form-label ">Quantity</label>
+                        <div class="col-sm-7 ">
+                            <input type="number " name="Quantity " id="SupplyQuantity " class="form-control " value='{{supply_item.Quantity}}'>
+                        </div>
+                    </div>
+                    <div class="forn-group d-flex flex-row justify-content-evenly ">
+                        <input type="submit " class="btn btn-outline-danger px-4 " value="Close">
+                        <input type="submit " class="btn btn-outline-success px-4 " value="Add">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}

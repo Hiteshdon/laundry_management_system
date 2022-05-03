@@ -1,0 +1,154 @@
+{% extends page %} {% block content %}
+<div class="container mt-5">
+    <div class="row gap-4 p-2 text-center">
+        <div class="col-8">
+            <div class="row gap-2">
+                <div class="col">
+                    <div id="color1" class=" card card-body shadow-sm gap-2">
+                        <h5 class="card-title ">Total Machines</h5>
+                        <span class="muted-text display-6 text-secondary ">10</span>
+                    </div>
+                </div>
+                <div class="col ">
+                    <div id="color2" class="card card-body shadow-sm gap-2">
+                        <h5 class="card-title ">Available machines</h5>
+                        <span class="muted-text display-6 text-secondary ">10</span>
+                    </div>
+                </div>
+                <div id="color3" class="card card-body shadow-sm m-3 ">
+                    <h5 class="card-title ">Orders List</h5>
+                    <div class="card chart-container ">
+                        <table class="table table-striped" id="scope">
+                            <thead>
+                                <tr>
+                                    <th scope="col">ID</th>
+                                    <th scope="col">Customer Name</th>
+                                    <th scope="col">Order Type</th>
+                                    <th scope="col">Order Date</th>
+                                    <th scope="col">Order cost</th>
+                                    <th scope="col">Assign</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td scope="row">1</td>
+                                    <td>Michael Gordan</td>
+                                    <td>Dry</td>
+                                    <td>12 April,2022 1PM</td>
+                                    <td>10</td>
+                                    <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Assign">Assign</button></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">2</td>
+                                    <td>Michael Gordan</td>
+                                    <td>Wash</td>
+                                    <td>13 April,2022 2PM</td>
+                                    <td>20</td>
+                                    <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Assign">Assign</button></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">3</td>
+                                    <td>Michael Gordan</td>
+                                    <td>Wash</td>
+                                    <td>14 April,2022 3PM</td>
+                                    <td>30</td>
+                                    <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Assign">Assign</button></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">4</td>
+                                    <td>Michael Gordan</td>
+                                    <td>Dry</td>
+                                    <td>15 April,2022 4PM</td>
+                                    <td>40</td>
+                                    <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Assign">Assign</button></td>
+                                </tr>
+                                <tr>
+                                    <td scope="row">5</td>
+                                    <td>Michael Gordan</td>
+                                    <td>Dry</td>
+                                    <td>16 April,2022 5PM</td>
+                                    <td>50</td>
+                                    <td><button type="button" class="btn btn-outline-success" data-bs-toggle="modal" data-bs-target="#Assign">Assign</button></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col ">
+            <div id="color3" class=" card card-body shadow-sm gap-2 mb-4">
+                <h5 class="card-title ">Assigned Machines</h5>
+                <span class="muted-text display-6 text-secondary ">10</span>
+
+
+            </div>
+
+            <div id="color1" class=" card card-body shadow-sm mb-4 gap-2">
+                <h5 class="card-title m-3">Manage Machines</h5>
+                <div class="d-grid gap-3 mx-3 mb-2">
+                    <a href="{% url 'employee:Machine Status' %}"><button type="button" class="btn btn-success">Check status</button></a>
+                    <!-- <button type="button" class="btn btn-success">Add Machine</button>
+                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#">Remove Machine</button> -->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="Assign" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Assign Machine</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="text-muted p-2 gap-2 d-grid">
+                    <b>Order ID:</b> {{first_user.id}}
+                    <br>
+                    <b>Customer Name: </b> {{first_user.Name}}
+                    <br>
+                    <b>Email id: </b> {{first_user.Email_id}}
+                    <br>
+                    <b>Order type: </b> {{first_user.Email_id}}
+                    <br>
+                    <div class="row">
+                        <div class="col-2">
+                            <b>Machine: </b>
+                        </div>
+                        <div class="col-8">
+                            <select class="form-select" aria-label="Machines list">
+                                {% for option in machines %}
+                                <option value="{{option.id}}">{{option.Name}}</option>
+                                {% endfor %}
+                              </select>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <input type="submit" class="btn btn-primary" value="Assign">
+            </div>
+        </div>
+    </div>
+</div>
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                ...
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
